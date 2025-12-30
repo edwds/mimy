@@ -23,7 +23,19 @@ const PORT = 3001;
 app.use(cors());
 app.use(express.json());
 
-// Health check endpoint
+// Minimal health check (no DB)
+app.get('/api/health-simple', (req, res) => {
+  res.json({
+    status: 'alive',
+    time: new Date().toISOString(),
+    env: {
+      VERCEL: process.env.VERCEL,
+      NODE_ENV: process.env.NODE_ENV
+    }
+  });
+});
+
+// Health check endpoint (with DB)
 app.get('/api/health', async (req, res) => {
   try {
     const db = (await import('./db/database')).default;
