@@ -29,8 +29,13 @@ app.use('/api', reviewRoutes);
 app.use('/api', shopRoutes);
 app.use('/api', keywordRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+// Only listen if this file is run directly (not as a module)
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
+}
+
+export default app;
 
 
