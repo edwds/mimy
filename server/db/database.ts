@@ -7,9 +7,15 @@ import fs from 'fs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Ensure current directory exists (should exist since database.ts is here)
-const dbDir = __dirname;
-const dbPath = path.join(dbDir, 'mimy.db');
+// Vercel environment check
+const isVercel = process.env.VERCEL === '1';
+
+// Database path: User /tmp in production (Vercel) because the fs is read-only
+const dbPath = isVercel
+    ? path.join('/tmp', 'mimy.db')
+    : path.join(__dirname, 'mimy.db');
+
+console.log('Using database at:', dbPath);
 
 const db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
@@ -219,7 +225,8 @@ function initializeTables() {
                     if (!err && row && row.count === 0) {
                         console.log('Populating clusters table...');
                         try {
-                            const clusterPath = path.join(__dirname, '../data/cluster.json');
+                            const clusterPath = path.resolve(process.cwd(), 'server/data/cluster.json');
+                            console.log('Loading clusters from:', clusterPath);
                             // We will keep cluster.json in server/data for now as it might be raw data, 
                             // but if you want to move it too, let me know.
                             // For now, I'll keep this path or move it if needed.
