@@ -49,16 +49,27 @@ export const ApiService = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, name, photo }),
     });
+
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.message || errorData.error || 'Login failed');
+      let errorMessage = 'Login failed';
+      try {
+        const errorData = await response.json();
+        errorMessage = errorData.message || errorData.error || errorData.details || errorMessage;
+      } catch (e) {
+        const rawText = await response.text().catch(() => '');
+        errorMessage = `Server error (${response.status}): ${rawText || response.statusText}`;
+      }
+      throw new Error(errorMessage);
     }
     return response.json();
   },
 
   getUser: async (id: number) => {
     const response = await fetch(`${API_BASE_URL}/users/${id}`);
-    if (!response.ok) throw new Error('Get user failed');
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || errorData.error || 'Get user failed');
+    }
     return response.json();
   },
 
@@ -68,7 +79,10 @@ export const ApiService = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
-    if (!response.ok) throw new Error('Update failed');
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || errorData.error || 'Update failed');
+    }
     return response.json();
   },
 
@@ -146,4 +160,3 @@ export const ApiService = {
     return response.json();
   }
 };
-
