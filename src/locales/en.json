@@ -1,0 +1,192 @@
+{
+    "onboarding": {
+        "welcome": {
+            "title": "Welcome!",
+            "subtitle": "Record your own gourmet profile\nand connect with like-minded foodies.",
+            "next": "Get Started"
+        },
+        "demographics": {
+            "title": "Basic Information",
+            "subtitle": "Please tell us your age and gender",
+            "birthDateLabel": "Birth Date",
+            "birthDateYear": "Year",
+            "birthDateMonth": "Month",
+            "birthDateDay": "Day",
+            "birthDatePlaceholder": "YYYY.MM.DD",
+            "genderLabel": "Gender",
+            "gender": {
+                "male": "Male",
+                "female": "Female",
+                "private": "Private"
+            },
+            "next": "Next"
+        },
+        "nickname": {
+            "title": "Enter your nickname",
+            "subtitle": "What name would you like to use in mimy?",
+            "placeholder": "Enter nickname",
+            "next": "Next"
+        },
+        "profile": {
+            "title": "Personalize your profile",
+            "subtitle": "Tell us about yourself with a photo and bio",
+            "bioLabel": "Bio",
+            "bioPlaceholder": "Express yourself in one line",
+            "next": "Next"
+        },
+        "quizInquiry": {
+            "title": "One last step!",
+            "subtitle": "Answer a quick survey,\nand we'll find restaurants that fit your taste!",
+            "confirm": "Start Gourmet Quiz",
+            "skip": "Do it later"
+        },
+        "result": {
+            "welcome": "Welcome, {{name}}!",
+            "tasteResult": "You have a {{taste}} taste!",
+            "description": "Find restaurants that suit you on mimy.",
+            "finish": "Start"
+        }
+    },
+    "splash": {
+        "tagline": "Record your own gourmet profile\nand connect with like-minded foodies.",
+        "startButton": "Get Started"
+    },
+    "login": {
+        "title": "To get started",
+        "subtitle": "Please log in to record your taste data.",
+        "later": "Maybe later"
+    },
+    "nickname": {
+        "title": "Please enter your nickname",
+        "subtitle": "Within 30 alphanumeric characters",
+        "placeholder": "nickname",
+        "next": "Next",
+        "validation": {
+            "required": "Please enter a nickname.",
+            "tooLong": "Nickname must be 30 characters or less.",
+            "invalid": "Only English letters, numbers, and underscores (_) are allowed."
+        }
+    },
+    "profileSetup": {
+        "title": "Setup your profile",
+        "subtitle": "Please provide your profile image and a short bio",
+        "bioLabel": "Bio",
+        "bioPlaceholder": "Tell us about yourself...",
+        "next": "Next"
+    },
+    "quiz": {
+        "dimension": "Taste Dimension",
+        "analyzing": "Analyzing taste data",
+        "analyzingSub": "Saving your taste map to our database.",
+        "options": {
+            "veryYes": "Strongly Agree",
+            "yes": "Agree",
+            "neutral": "Neutral",
+            "no": "Disagree",
+            "veryNo": "Strongly Disagree"
+        }
+    },
+    "main": {
+        "home": "Home",
+        "homePreparing": "Content is coming soon.",
+        "leaderboard": "Leaderboard",
+        "leaderboardPreparing": "Leaderboard feature is coming soon.",
+        "profile": {
+            "edit": "Edit Profile",
+            "defaultBio": "I'm a taste explorer."
+        }
+    },
+    "profile": {
+        "rankingSettings": "Ranking Visibility Settings"
+    },
+    "settings": {
+        "title": "Settings",
+        "retest": {
+            "title": "Retake Gourmet Quiz",
+            "subtitle": "Re-analyze your taste profile"
+        },
+        "logout": {
+            "title": "Logout",
+            "subtitle": "Log out from your account"
+        }
+    },
+    "profileEdit": {
+        "title": "Edit Profile",
+        "changePhoto": "Change Photo",
+        "nickname": "Nickname",
+        "nicknamePlaceholder": "Enter your nickname",
+        "bio": "Bio",
+        "bioPlaceholder": "Describe yourself in one line",
+        "cancel": "Cancel",
+        "save": "Save Changes",
+        "saving": "Saving...",
+        "success": "Profile updated successfully.",
+        "failure": "Failed to update profile.",
+        "validation": {
+            "invalid": "Only letters, numbers, periods (.), hyphens (-), and underscores (_) are allowed."
+        },
+        "visibility": {
+            "label": "Ranking Visibility",
+            "public": "Public",
+            "publicDetail": "Public",
+            "partial": "Partial",
+            "partialDetail": "Up to rank {{limit}}",
+            "private": "Private",
+            "limitPlaceholder": "Rank",
+            "limitSuffix": "",
+            "description": "Your ranking will be visible up to the specified limit."
+        }
+    },
+    "questions": {
+        "1": "I prefer foods with very strong aromas and flavors.",
+        "2": "I tend to use salt, pepper, or herbs generously.",
+        "3": "I like clear and intense flavors rather than subtle ones.",
+        "4": "I enjoy sour flavors or the tanginess of vinegar.",
+        "5": "I often look for foods with lemon juice or dressings.",
+        "6": "I like desserts with a hint of fruit acidity.",
+        "7": "I like heavy flavors with lots of butter or cream.",
+        "8": "I enjoy the savory richness of meat fat.",
+        "9": "I don't get tired of eating cheese or oily foods.",
+        "10": "I am not hesitant to try new ingredients or dishes I've never had before.",
+        "11": "I enjoy trying fusion cuisine or unique food combinations.",
+        "12": "I look for new restaurants rather than just going to places I've been.",
+        "13": "I eat spicy food well and feel it relieves my stress.",
+        "14": "I often want to add chili or hot sauce to most of my food.",
+        "15": "I prefer heat that is intense enough to make my tongue tingle.",
+        "16": "I always make sure to have a sweet dessert after a meal.",
+        "17": "I really like the harmony of 'sweet and salty' flavors.",
+        "18": "I enjoy the sweet flavors of sugar or syrup in my food.",
+        "19": "I value the deep and savory umami of soup dishes.",
+        "20": "I like deep flavors from mushrooms, kelp, or aged cheese.",
+        "21": "I prefer the taste of savory seasonings or fermented foods."
+    },
+    "discovery": {
+        "loading": "Loading restaurants...",
+        "todayPick": "Today's Pick",
+        "todayPickSub": "Places that perfectly match your taste",
+        "searchPlaceholder": "Search for restaurant/cafe",
+        "noResults": "No results found.",
+        "back": "Back"
+    },
+    "myPage": {
+        "tabs": {
+            "reviews": "Reviews",
+            "mylist": "My List"
+        },
+        "reviews": {
+            "loading": "Loading...",
+            "empty": "No reviews yet.\nWrite your first review!",
+            "edit": "Edit",
+            "rank": "RANK #{{rank}}",
+            "rankFmt": "{{rank}}{{suffix}}",
+            "visitCount": "{{count}}{{suffix}} visit",
+            "satisfaction": {
+                "liked": "Liked"
+            }
+        },
+        "mylist": {
+            "loading": "Loading...",
+            "empty": "No saved places.\nFind places in Discovery tab!"
+        }
+    }
+}

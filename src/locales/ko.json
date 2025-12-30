@@ -1,0 +1,269 @@
+{
+    "onboarding": {
+        "welcome": {
+            "title": "환영합니다!",
+            "subtitle": "나만의 미식 기록을 남기고\n취향이 맞는 미식가들과 친구가 되어보세요.",
+            "next": "시작하기"
+        },
+        "demographics": {
+            "title": "기본 정보를 알려주세요",
+            "subtitle": "당신의 나이와 성별을 알려주세요",
+            "birthDateLabel": "생년월일",
+            "birthDateYear": "년",
+            "birthDateMonth": "월",
+            "birthDateDay": "일",
+            "birthDatePlaceholder": "YYYY.MM.DD",
+            "genderLabel": "성별",
+            "gender": {
+                "male": "남성",
+                "female": "여성",
+                "private": "미공개"
+            },
+            "next": "다음"
+        },
+        "nickname": {
+            "title": "닉네임을 알려주세요",
+            "subtitle": "mimy에서 사용하실 이름을 알려주세요",
+            "placeholder": "닉네임을 입력하세요",
+            "next": "다음"
+        },
+        "profile": {
+            "title": "프로필을 꾸며보세요",
+            "subtitle": "당신의 사진과 자기소개를 알려주세요",
+            "bioLabel": "자기소개",
+            "bioPlaceholder": "나를 한 줄로 표현해보세요",
+            "next": "다음"
+        },
+        "quizInquiry": {
+            "title": "마지막 한 단계!",
+            "subtitle": "간단한 설문에 응답하면,\n내 입에 딱인 음식점을 찾을 수 있어요!",
+            "confirm": "미식 퀴즈 시작하기",
+            "skip": "나중에 하기"
+        },
+        "result": {
+            "welcome": "환영합니다 {{name}}님!",
+            "tasteResult": "당신은 {{taste}} 입맛을 가지고 있군요!",
+            "description": "mimy에서 당신에게 어울리는 식당을 찾아보세요.",
+            "finish": "시작하기"
+        }
+    },
+    "splash": {
+        "tagline": "나만의 미식 기록을 남기고\n취향이 맞는 미식가들과 친구가 되는\n미식 소셜 서비스, mimy",
+        "startButton": "시작하기"
+    },
+    "login": {
+        "title": "본격적인 분석을 위해",
+        "subtitle": "로그인 후 당신의 미각 데이터를 기록하세요.",
+        "later": "나중에 할래요"
+    },
+    "nickname": {
+        "title": "닉네임을 입력해주세요",
+        "subtitle": "영문 30자 이내로 입력해주세요",
+        "placeholder": "nickname",
+        "next": "다음",
+        "validation": {
+            "required": "닉네임을 입력해주세요.",
+            "tooLong": "닉네임은 30자 이하여야 합니다.",
+            "invalid": "영문, 숫자, 언더스코어(_)만 사용 가능합니다."
+        }
+    },
+    "profileSetup": {
+        "title": "프로필을 설정해주세요",
+        "subtitle": "프로필 이미지와 자기소개를 작성해주세요",
+        "bioLabel": "자기소개",
+        "bioPlaceholder": "자기소개를 입력해주세요...",
+        "next": "다음"
+    },
+    "quiz": {
+        "dimension": "Taste Dimension",
+        "analyzing": "미각 데이터 분석 중",
+        "analyzingSub": "당신의 입맛 지도를 DB에 저장하고 있습니다.",
+        "options": {
+            "veryYes": "매우 그렇다",
+            "yes": "약간 그렇다",
+            "neutral": "보통이다",
+            "no": "별로 그렇지 않다",
+            "veryNo": "전혀 그렇지 않다"
+        }
+    },
+    "main": {
+        "home": "홈",
+        "homePreparing": "콘텐츠가 준비 중입니다.",
+        "leaderboard": "리더보드",
+        "leaderboardPreparing": "리더보드 기능이 준비 중입니다.",
+        "profile": {
+            "edit": "프로필 수정",
+            "defaultBio": "입맛 탐험가입니다."
+        }
+    },
+    "profile": {
+        "rankingSettings": "랭킹 공개 설정"
+    },
+    "settings": {
+        "title": "설정",
+        "retest": {
+            "title": "미식 퀴즈 다시하기",
+            "subtitle": "나의 입맛을 다시 분석해보세요"
+        },
+        "logout": {
+            "title": "로그아웃",
+            "subtitle": "계정에서 로그아웃합니다"
+        }
+    },
+    "profileEdit": {
+        "title": "프로필 수정",
+        "changePhoto": "사진 바꾸기",
+        "nickname": "닉네임",
+        "nicknamePlaceholder": "닉네임을 입력하세요",
+        "bio": "자기소개",
+        "bioPlaceholder": "나를 한 줄로 표현해보세요",
+        "visibility": {
+            "label": "랭킹 공개 설정",
+            "public": "전체 공개",
+            "publicDetail": "전체 공개",
+            "partial": "부분 공개",
+            "partialDetail": "{{limit}}위까지 공개",
+            "private": "비공개",
+            "limitPlaceholder": "순위 입력",
+            "limitSuffix": "위까지 공개",
+            "description": "설정한 순위까지만 다른 사람에게 공개됩니다."
+        },
+        "cancel": "취소",
+        "save": "저장하기",
+        "saving": "저장 중...",
+        "success": "프로필이 성공적으로 업데이트되었습니다.",
+        "failure": "프로필 업데이트에 실패했습니다.",
+        "validation": {
+            "invalid": "영문, 숫자, 마침표(.), 빼기(-), 밑줄(_)만 사용할 수 있습니다."
+        }
+    },
+    "questions": {
+        "1": "나는 음식의 향과 풍미가 아주 강한 것을 선호한다.",
+        "2": "소금이나 후추, 허브를 넉넉히 쓰는 편이다.",
+        "3": "은은한 맛보다는 확실하고 진한 맛을 좋아한다.",
+        "4": "새콤한 맛이나 식초의 시큼함을 즐긴다.",
+        "5": "레몬즙이나 드레싱이 들어간 음식을 자주 찾는다.",
+        "6": "과일의 산미가 느껴지는 디저트를 좋아한다.",
+        "7": "버터나 크림이 많이 들어간 묵직한 맛을 좋아한다.",
+        "8": "고기 지방의 고소함을 즐기는 편이다.",
+        "9": "치즈나 기름진 음식을 먹어도 질리지 않는다.",
+        "10": "먹어보지 못한 새로운 식재료나 요리에 거부감이 없다.",
+        "11": "퓨전 요리나 독특한 조합의 음식을 시도하는 것을 즐긴다.",
+        "12": "항상 먹던 것보다 새로운 맛집을 찾아다닌다.",
+        "13": "매운 음식을 잘 먹고 스트레스가 풀린다고 느낀다.",
+        "14": "웬만한 음식에 고추나 핫소스를 추가하고 싶을 때가 많다.",
+        "15": "혀가 얼얼할 정도의 화끈한 맛을 선호한다.",
+        "16": "식후에 달콤한 디저트를 반드시 챙겨 먹는 편이다.",
+        "17": "단짠단짠(달고 짠) 맛의 조화를 매우 좋아한다.",
+        "18": "음식에 설탕이나 시럽이 들어간 달달한 풍미를 즐긴다.",
+        "19": "국물 요리의 깊고 진한 감칠맛을 중요하게 생각한다.",
+        "20": "버섯, 다시마, 숙성 치즈 같은 깊은 풍미를 좋아한다.",
+        "21": "입에 착 붙는 조미료나 발효 음식의 맛을 선호한다."
+    },
+    "discovery": {
+        "loading": "맛집을 찾는 중...",
+        "todayPick": "오늘의 추천",
+        "todayPickSub": "회원님 취향에 딱 맞는 곳들이에요",
+        "searchPlaceholder": "식당/카페 이름 검색",
+        "noResults": "검색 결과가 없어요.",
+        "back": "뒤로"
+    },
+    "myPage": {
+        "tabs": {
+            "reviews": "나의 방문 기록",
+            "mylist": "가고 싶어요"
+        },
+        "reviews": {
+            "loading": "기록을 불러오는 중...",
+            "empty": "아직 남긴 기록이 없어요.\n첫 번째 맛집을 기록해보세요!",
+            "edit": "수정",
+            "rank": "RANK #{{rank}}",
+            "rankFmt": "{{rank}}위",
+            "visitCount": "{{count}}번째 방문",
+            "satisfaction": {
+                "liked": "최고예요"
+            }
+        },
+        "mylist": {
+            "loading": "로딩 중...",
+            "empty": "저장한 맛집이 없어요.\n탐색 탭에서 맛집을 찾아보세요!"
+        }
+    },
+    "write": {
+        "steps": {
+            "search": "장소 찾기",
+            "satisfaction": "만족도 선택",
+            "content": "기록 하기",
+            "keywords": "키워드 선택",
+            "ranking": "순위 정하기"
+        },
+        "common": {
+            "cancel": "취소",
+            "next": "다음",
+            "close": "닫기",
+            "prev": "이전",
+            "complete": "완료"
+        },
+        "search": {
+            "title": "어디를 다녀오셨나요?",
+            "subtitle": "기록하고 싶은 장소를 검색해보세요",
+            "placeholder": "식당/카페 이름 검색",
+            "searching": "검색 중...",
+            "noResult": "검색 결과가 없어요.",
+            "manualInput": "직접 입력하기",
+            "manualInputLink": "건너뛰고 직접 입력하기",
+            "guide": "이름을 입력하면 결과가 나옵니다."
+        },
+        "satisfaction": {
+            "title": "{{name}}님,",
+            "subtitle": "이 곳 어떠셨나요?",
+            "options": {
+                "liked": {
+                    "label": "좋았어요",
+                    "desc": "또 가고 싶은 곳이에요"
+                },
+                "normal": {
+                    "label": "보통이에요",
+                    "desc": "무난한 곳이에요"
+                },
+                "disliked": {
+                    "label": "별로에요",
+                    "desc": "아쉬움이 남아요"
+                }
+            }
+        },
+        "content": {
+            "placeholder": "어떤 메뉴가 맛있었나요? 분위기는 어땠나요?",
+            "shopInfo": "장소 정보",
+            "shopName": "업장명",
+            "category": "카테고리",
+            "visitDate": "방문일",
+            "companions": "동행",
+            "companionsPlaceholder": "친구, 가족"
+        },
+        "keywords": {
+            "title": "이 곳의 특징은?",
+            "subtitle": "어울리는 키워드를 모두 골라주세요",
+            "tastePrice": "😋 맛/가격",
+            "atmosphereService": "✨ 분위기/서비스",
+            "loading": "키워드를 불러오는 중..."
+        },
+        "ranking": {
+            "title": "취향 밸런스 게임!",
+            "subtitle": "두 곳 중 어디가 더 좋으셨나요?",
+            "new": "NEW ✨",
+            "best": "My Best 🏆",
+            "types": {
+                "similar_category": "비슷한 음식점과 비교해보세요",
+                "recent": "최근에 다녀온 곳보다 좋았나요?",
+                "repeat_visit": "이전 방문때보다 만족하시나요?"
+            }
+        },
+        "alerts": {
+            "selectSatisfaction": "만족도를 선택해주세요.",
+            "uploadPhoto": "최소 1장의 사진을 등록해주세요!",
+            "enterInfo": "업장명과 카테고리를 입력해주세요.",
+            "saveFailure": "리뷰 저장에 실패했습니다."
+        }
+    }
+}

@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Testing
+coverage/
+
+# Production
+dist/
+build/
+
+# Misc
+.DS_Store
+*.pem
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# SQLite Database
+server/db/mimy.db
+server/db/mimy.db-journal
+server/db/mimy.db-shm
+server/db/mimy.db-wal
+
+# AI / IDE
+.vscode/
+.idea/
+.agent/
+AGENT_RULES.md
+DEVELOPMENT_GUIDELINES.md
+metadata.json
+files.txt
