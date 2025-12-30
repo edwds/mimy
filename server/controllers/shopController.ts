@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import db from '../db/database';
 
-export const searchShops = (req: Request, res: Response) => {
+export const searchShops = async (req: Request, res: Response) => {
     const query = req.query.q as string;
 
     if (!query) {
@@ -16,29 +16,30 @@ export const searchShops = (req: Request, res: Response) => {
         LIMIT 20
     `;
 
-    db.all(sql, [`%${query}%`, `%${query}%`, `%${query}%`], (err, rows) => {
-        if (err) {
-            console.error('Error searching shops:', err);
-            res.status(500).json({ error: err.message });
-            return;
-        }
-        res.json(rows);
-    });
+    try {
+        const result = await db.execute({
+            sql,
+            args: [`%${query}%`, `%${query}%`, `%${query}%`]
+        });
+        res.json(result.rows);
+    } catch (err: any) {
+        console.error('Error searching shops:', err);
+        res.status(500).json({ error: err.message });
+    }
 };
 
-export const getExploreShops = (req: Request, res: Response) => {
+export const getExploreShops = async (req: Request, res: Response) => {
     // Get random 20 shops for exploration
     const sql = `SELECT * FROM shops ORDER BY RANDOM() LIMIT 20`;
-    db.all(sql, [], (err, rows) => {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
-        res.json(rows);
-    });
+    try {
+        const result = await db.execute(sql);
+        res.json(result.rows);
+    } catch (err: any) {
+        res.status(500).json({ error: err.message });
+    }
 };
 
-export const getMyList = (req: Request, res: Response) => {
+export const getMyList = async (req: Request, res: Response) => {
     const { email } = req.params;
     const sql = `
         SELECT s.*, m.created_at as saved_at 
@@ -47,39 +48,45 @@ export const getMyList = (req: Request, res: Response) => {
         WHERE m.email = ?
         ORDER BY m.created_at DESC
     `;
-    db.all(sql, [email], (err, rows) => {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
-        res.json(rows);
-    });
+    try {
+        const result = await db.execute({
+            sql,
+            args: [email]
+        });
+        res.json(result.rows);
+    } catch (err: any) {
+        res.status(500).json({ error: err.message });
+    }
 };
 
-export const addToMyList = (req: Request, res: Response) => {
+export const addToMyList = async (req: Request, res: Response) => {
     const { email, shopId } = req.body;
     const sql = `INSERT INTO mylists (email, shop_id) VALUES (?, ?)`;
-    db.run(sql, [email, shopId], function (err) {
-        if (err) {
-            if (err.message.includes('UNIQUE constraint failed')) {
-                res.status(409).json({ error: 'Shop already in MyList' });
-                return;
-            }
-            res.status(500).json({ error: err.message });
+    try {
+        const result = await db.execute({
+            sql,
+            args: [email, shopId]
+        });
+        res.json({ success: true, id: Number(result.lastInsertRowid) });
+    } catch (err: any) {
+        if (err.message.includes('UNIQUE constraint failed')) {
+            res.status(409).json({ error: 'Shop already in MyList' });
             return;
         }
-        res.json({ success: true, id: this.lastID });
-    });
+        res.status(500).json({ error: err.message });
+    }
 };
 
-export const removeFromMyList = (req: Request, res: Response) => {
+export const removeFromMyList = async (req: Request, res: Response) => {
     const { email, shopId } = req.params;
     const sql = `DELETE FROM mylists WHERE email = ? AND shop_id = ?`;
-    db.run(sql, [email, shopId], function (err) {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
+    try {
+        await db.execute({
+            sql,
+            args: [email, shopId]
+        });
         res.json({ success: true });
-    });
+    } catch (err: any) {
+        res.status(500).json({ error: err.message });
+    }
 };
