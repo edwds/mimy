@@ -1,28 +1,41 @@
 import { createClient } from '@libsql/client';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { shops } from './seeds';
 import fs from 'fs';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const isVercel = process.env.VERCEL === '1';
+
 // Turso configuration
-const url = process.env.TURSO_DATABASE_URL || `file:${path.join(__dirname, 'mimy.db')}`;
+const url = process.env.TURSO_DATABASE_URL;
 const authToken = process.env.TURSO_AUTH_TOKEN;
 
-console.log('Connecting to database at:', url);
+if (isVercel && !url) {
+    console.error('CRITICAL: TURSO_DATABASE_URL is not set in Vercel environment variables.');
+}
+
+const dbUrl = url || `file:${path.join(__dirname, 'mimy.db')}`;
+console.log('Connecting to database at:', dbUrl.split('@')[0]); // Log part of URL for security
 
 const db = createClient({
-    url,
+    url: dbUrl,
     authToken,
 });
 
-async function initializeTables() {
+let isInitialized = false;
+
+/**
+ * Ensures tables are created and seeded.
+ * Called lazily by services or once at startup.
+ */
+export async function ensureInitialized() {
+    if (isInitialized) return;
+
     try {
+        console.log('Database check: ensuring tables exist...');
+
         // Users Table
         await db.execute(`CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -119,9 +132,13 @@ async function initializeTables() {
             lon TEXT
         )`);
 
-        const shopCount = await db.execute("SELECT count(*) as count FROM shops");
-        if (Number(shopCount.rows[0].count) === 0) {
-            console.log('Populating shops table with mock data...');
+        const shopCountResult = await db.execute("SELECT count(*) as count FROM shops");
+        const shopCount = Number(shopCountResult.rows[0].count);
+
+        if (shopCount === 0) {
+            console.log('Shops table empty. Seeding local mock data...');
+            // Dynamic import to keep cold starts fast if not seeding
+            const { shops } = await import('./seeds');
             const batches = (shops as any[]).map(item => ({
                 sql: "INSERT INTO shops (id, shopRef, shopName, shopNameEn, shopNameKo, shopNameJp, detailEn, detailKo, detailJp, foodKind, categoryEnum, landName, landEnum, priceRange, lat, lon) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 args: [
@@ -139,16 +156,16 @@ async function initializeTables() {
                     item.landName || item.landEnum || '',
                     item.landEnum || '',
                     item.priceRange || '',
-                    item.lat.toString(),
-                    item.lon.toString()
+                    item.lat ? item.lat.toString() : '0',
+                    item.lon ? item.lon.toString() : '0'
                 ]
             }));
             await db.batch(batches, "write");
             console.log('Shops populated successfully.');
         }
 
-        // MyList Table
-        await db.execute(`CREATE TABLE IF NOT EXISTS mylists (
+        // Other tables seeding...
+        const mylistsExists = await db.execute(`CREATE TABLE IF NOT EXISTS mylists (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             email TEXT,
             shop_id INTEGER,
@@ -157,7 +174,6 @@ async function initializeTables() {
             UNIQUE(email, shop_id)
         )`);
 
-        // Likes Table
         await db.execute(`CREATE TABLE IF NOT EXISTS likes (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             user_id INTEGER,
@@ -168,7 +184,6 @@ async function initializeTables() {
             UNIQUE(user_id, review_id)
         )`);
 
-        // Clusters Table
         await db.execute(`CREATE TABLE IF NOT EXISTS clusters (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             cluster_id TEXT,
@@ -177,10 +192,10 @@ async function initializeTables() {
             cluster_tagline TEXT
         )`);
 
-        const clusterCount = await db.execute("SELECT count(*) as count FROM clusters");
-        if (Number(clusterCount.rows[0].count) === 0) {
-            console.log('Populating clusters table...');
-            const clusterPath = path.resolve(process.cwd(), 'server/data/cluster.json');
+        const clusterCountResult = await db.execute("SELECT count(*) as count FROM clusters");
+        if (Number(clusterCountResult.rows[0].count) === 0) {
+            console.log('Clusters table empty. Seeding...');
+            const clusterPath = path.join(__dirname, '../data/cluster.json');
             if (fs.existsSync(clusterPath)) {
                 const clusterData = JSON.parse(fs.readFileSync(clusterPath, 'utf-8'));
                 const batches = clusterData.map((c: any) => ({
@@ -188,11 +203,10 @@ async function initializeTables() {
                     args: [c.cluster_id, c.cluster_medoid_value, c.cluster_name, c.cluster_tagline]
                 }));
                 await db.batch(batches, "write");
-                console.log('Clusters populated successfully.');
+                console.log('Clusters populated.');
             }
         }
 
-        // Keywords Table
         await db.execute(`CREATE TABLE IF NOT EXISTS keywords (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             category TEXT,
@@ -200,8 +214,8 @@ async function initializeTables() {
             text TEXT
         )`);
 
-        const keywordCount = await db.execute("SELECT count(*) as count FROM keywords");
-        if (Number(keywordCount.rows[0].count) === 0) {
+        const keywordCountResult = await db.execute("SELECT count(*) as count FROM keywords");
+        if (Number(keywordCountResult.rows[0].count) === 0) {
             const keywordData = [
                 ['taste', 'TASTE_DELICIOUS', '맛있어요'],
                 ['taste', 'TASTE_LARGE_PORTION', '양이 많아요'],
@@ -223,10 +237,8 @@ async function initializeTables() {
                 args: kw
             }));
             await db.batch(batches, "write");
-            console.log('Keywords populated.');
         }
 
-        // Comments Table
         await db.execute(`CREATE TABLE IF NOT EXISTS comments (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             review_id INTEGER,
@@ -239,13 +251,24 @@ async function initializeTables() {
 
         await db.execute(`CREATE INDEX IF NOT EXISTS idx_comments_review_id ON comments(review_id)`);
 
-        console.log('All tables initialized successfully.');
+        isInitialized = true;
+        console.log('Database initialization complete.');
     } catch (error) {
-        console.error('Error during table initialization:', error);
+        console.error('CRITICAL: Database initialization failed:', error);
+        // Throw to ensure calling functions know it's not ready
+        throw error;
     }
 }
 
-// Automatically initialize when file is loaded
-initializeTables();
+const client = {
+    execute: async (stmt: any) => {
+        await ensureInitialized();
+        return db.execute(stmt);
+    },
+    batch: async (stmts: any[], mode?: any) => {
+        await ensureInitialized();
+        return db.batch(stmts, mode);
+    }
+};
 
-export default db;
+export default client;

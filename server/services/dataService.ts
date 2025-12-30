@@ -15,7 +15,7 @@ export const DataService = {
       return cachedMatchMap;
     }
 
-    const tsvPath = path.resolve(process.cwd(), 'server/data/match.tsv');
+    const tsvPath = path.join(__dirname, '../data/match.tsv');
     const tsvText = fs.readFileSync(tsvPath, 'utf-8');
     cachedMatchMap = parseTSV(tsvText);
 

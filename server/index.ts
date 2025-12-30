@@ -2,7 +2,10 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
 import clusterRoutes from './routes/clusterRoutes';
+
+dotenv.config();
 import userRoutes from './routes/userRoutes';
 import uploadRoutes from './routes/uploadRoutes';
 import reviewRoutes from './routes/reviewRoutes';
