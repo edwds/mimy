@@ -50,7 +50,7 @@ export const ReviewController = {
             `;
             const result = await db.execute({
                 sql: query,
-                args: [currentUserId || null, email]
+                args: [(currentUserId as string) || null, email]
             });
             const rows = result.rows;
 
@@ -230,7 +230,7 @@ export const ReviewController = {
 
             const result = await db.execute({
                 sql: query,
-                args: [userId, limit, offset]
+                args: [(userId as string) || null, limit, offset]
             });
             const rows = result.rows;
 
