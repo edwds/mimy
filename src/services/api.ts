@@ -14,7 +14,8 @@ export const ApiService = {
       });
 
       if (!response.ok) {
-        throw new Error(`Failed to match cluster: ${response.statusText}`);
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || errorData.error || `Failed to match cluster: ${response.statusText}`);
       }
 
       const cluster = await response.json();
@@ -30,7 +31,8 @@ export const ApiService = {
       const response = await fetch(`${API_BASE_URL}/clusters`);
 
       if (!response.ok) {
-        throw new Error(`Failed to fetch clusters: ${response.statusText}`);
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || errorData.error || `Failed to fetch clusters: ${response.statusText}`);
       }
 
       const clusters = await response.json();
@@ -47,7 +49,10 @@ export const ApiService = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, name, photo }),
     });
-    if (!response.ok) throw new Error('Login failed');
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || errorData.error || 'Login failed');
+    }
     return response.json();
   },
 

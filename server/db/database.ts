@@ -17,7 +17,9 @@ if (isVercel && !url) {
 }
 
 const dbUrl = url || `file:${path.join(__dirname, 'mimy.db')}`;
-console.log('Connecting to database at:', dbUrl.split('@')[0]); // Log part of URL for security
+console.log('Connecting to database:', isVercel ? 'Turso (Cloud)' : 'Local SQLite');
+console.log('Database URL Present:', !!url);
+console.log('Auth Token Present:', !!authToken);
 
 const db = createClient({
     url: dbUrl,

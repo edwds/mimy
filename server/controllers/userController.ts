@@ -16,7 +16,8 @@ export const loginUser = async (req: Request, res: Response) => {
 
         res.json(user);
     } catch (error: any) {
-        res.status(500).json({ message: error.message });
+        console.error('Login error:', error);
+        res.status(500).json({ message: 'Login failed', details: error.message });
     }
 };
 
@@ -31,7 +32,8 @@ export const getUser = async (req: Request, res: Response) => {
 
         res.json({ ...user, latestResult: result });
     } catch (error: any) {
-        res.status(500).json({ message: error.message });
+        console.error('GetUser error:', error);
+        res.status(500).json({ message: 'Failed to fetch user', details: error.message });
     }
 };
 
@@ -41,7 +43,8 @@ export const updateUser = async (req: Request, res: Response) => {
         const updatedUser = await UserService.updateUser(Number(id), req.body);
         res.json(updatedUser);
     } catch (error: any) {
-        res.status(500).json({ message: error.message });
+        console.error('UpdateUser error:', error);
+        res.status(500).json({ message: 'Update failed', details: error.message });
     }
 };
 
@@ -51,7 +54,8 @@ export const saveQuiz = async (req: Request, res: Response) => {
         await UserService.saveQuizResult(userId, profile, cluster);
         res.json({ success: true });
     } catch (error: any) {
-        res.status(500).json({ message: error.message });
+        console.error('SaveQuiz error:', error);
+        res.status(500).json({ message: 'Failed to save quiz', details: error.message });
     }
 };
 
@@ -61,6 +65,7 @@ export const getQuizHistory = async (req: Request, res: Response) => {
         const result = await UserService.getLatestResult(Number(userId));
         res.json(result);
     } catch (error: any) {
-        res.status(500).json({ message: error.message });
+        console.error('GetQuizHistory error:', error);
+        res.status(500).json({ message: 'Failed to fetch quiz history', details: error.message });
     }
 };
